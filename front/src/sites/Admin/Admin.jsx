@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
@@ -116,20 +116,20 @@ const Admin = () => {
 
     useEffect(() => {
         welcome();
-    },)
+    })
 
     return (
         <Container>
             <Router>
                 <NavAdmin />
-                <div className="welcome">
+                {/*<div className="welcome">
                     <h3>Witaj {userName}</h3>
                     <p>Co dziś robimy?</p>
-                    </div>
+    </div>*/}
                 <Switch>
                     <Route exact path="/reservation" component={Reservation} />
-                    <Route exact path="/posts"/>
-                    <Route exact path="/gallery" component={AdminGallery}/>
+                    <Route exact path="/posts" />
+                    <Route exact path="/gallery" component={AdminGallery} />
                 </Switch>
             </Router>
         </Container>
