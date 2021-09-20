@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../utils/utils';
+import AdminBlog from './AdminBlog';
 import AdminGallery from './AdminGallery';
+import AdminPriceList from './AdminPriceList';
 import NavAdmin from './NavAdmin';
 import Reservation from './Reservation';
 
@@ -128,8 +130,9 @@ const Admin = () => {
     </div>*/}
                 <Switch>
                     <Route exact path="/reservation" component={Reservation} />
-                    <Route exact path="/posts" />
+                    <Route exact path="/posts" component={AdminBlog}/>
                     <Route exact path="/gallery" component={AdminGallery} />
+                    <Route exact path="/price_list" component={AdminPriceList} />
                 </Switch>
             </Router>
         </Container>

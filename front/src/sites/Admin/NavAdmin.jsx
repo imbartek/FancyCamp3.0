@@ -8,6 +8,7 @@ export default function NavAdmin() {
                 <li><Link to="/reservation">Rezerwacje</Link></li>
                 <li><Link to="/posts">Posty</Link></li>
                 <li><Link to="/gallery">Galeria</Link></li>
+                <li><Link to="/price_list">Cennik</Link></li>
             </ul>
         </nav>
     )

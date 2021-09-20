@@ -322,49 +322,49 @@ const Calendar = () => {
     return (
         <Container>
             <div className="contact_container">
-            <h1>Rezerwacje</h1>
-            <div className="calendar">
-                <select name="mounths" id="mounths" onChange={changeMounth}>
+                <h1>Rezerwacje</h1>
+                <div className="calendar">
+                    <select name="mounths" id="mounths" onChange={changeMounth}>
 
-                </select>
-                <table className="calendar_table" onClick={handleClick}>
-                </table>
-            </div>
-            <div className="date"></div>
-            <form className="form_container">
-                <label htmlFor="name">Imię</label>
-                <input type="text" name="name" onChange={ (e) => setName(e.target.value)} required/>
-
-                <label htmlFor="surname">Nazwisko</label>
-                <input type="text" name="surname" onChange={(e) => setSurname(e.target.value)} required/>
-
-                <label htmlFor="tel">Telefon</label>
-                <input type="text" name="tel" onChange={(e) => setPhone(e.target.value)} required/>
-
-                <div className="checkbox_container">
-                    <input type="checkbox" name="rodo" id="rodo" required onChange={() => setFirstCheckBox(true)}/>
-                    <label htmlFor="rodo">
-                        <a href="rodo">Akceptuę politykę prywatności</a></label>
+                    </select>
+                    <table className="calendar_table" onClick={handleClick}>
+                    </table>
                 </div>
-
-                <div className="checkbox_container statement_container">
-                        <input type="checkbox" name="statement" id="statement" required onChange={ () => setSecondCheckBox(true) }/>
-                    <label htmlFor="statement" className="statement">Działając w imieniu własnym, w związku z przekazywanymi danymi osobowymi Administratorowi danych  LM FLOW Sp. z o. o. z siedzibą w Goląszy Dolnej, Goląsza Dolna 44, gmina Psary, 42-504, zarejestrowanego w Sądzie Rejonowym Katowice-Wschód w Katowicach, Wydział VIII Gospodarczy Krajowego Rejestru Sądowego, pod nr KRS: 599464, posługującego się nr NIP: 625-245-63-17, niniejszym oświadczam, że zostałem pouczony przez Administratora danych, że obowiązek informacyjny przewidziany w art. 13 RODO został przez niego wypełniony w zakładce Polityka prywatności.</label>
-                </div>
+                <div className="date"></div>
                 <Btn
                     name="Resetuj"
                     click={resetDate}
                     class="resetBtn"
                 />
-                <Btn
-                    name="Zarezerwuj"
-                    click={bookIt}
-                    class="resetBtn"
-                />
+                <form className="form_container">
+                    <label htmlFor="name">Imię</label>
+                    <input type="text" name="name" onChange={(e) => setName(e.target.value)} required />
+
+                    <label htmlFor="surname">Nazwisko</label>
+                    <input type="text" name="surname" onChange={(e) => setSurname(e.target.value)} required />
+
+                    <label htmlFor="tel">Telefon</label>
+                    <input type="text" name="tel" onChange={(e) => setPhone(e.target.value)} required />
+
+                    <div className="checkbox_container">
+                        <input type="checkbox" name="rodo" id="rodo" required onChange={() => setFirstCheckBox(true)} />
+                        <label htmlFor="rodo">
+                            <a href="rodo">Akceptuę politykę prywatności</a></label>
+                    </div>
+
+                    <div className="checkbox_container statement_container">
+                        <input type="checkbox" name="statement" id="statement" required onChange={() => setSecondCheckBox(true)} />
+                        <label htmlFor="statement" className="statement">Działając w imieniu własnym, w związku z przekazywanymi danymi osobowymi Administratorowi danych  LM FLOW Sp. z o. o. z siedzibą w Goląszy Dolnej, Goląsza Dolna 44, gmina Psary, 42-504, zarejestrowanego w Sądzie Rejonowym Katowice-Wschód w Katowicach, Wydział VIII Gospodarczy Krajowego Rejestru Sądowego, pod nr KRS: 599464, posługującego się nr NIP: 625-245-63-17, niniejszym oświadczam, że zostałem pouczony przez Administratora danych, że obowiązek informacyjny przewidziany w art. 13 RODO został przez niego wypełniony w zakładce Polityka prywatności.</label>
+                    </div>
+                    <Btn
+                        name="Zarezerwuj"
+                        click={bookIt}
+                        class="resetBtn"
+                    />
                 </form>
             </div>
             {
-                showPopUp && <Popup name="Zarezerwowano"/>
+                showPopUp && <Popup name="Zarezerwowano" />
             }
         </Container >
     );

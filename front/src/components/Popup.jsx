@@ -6,7 +6,7 @@ const Container = styled.div`
     width: 80%;
     height: 30%;
     position: fixed;
-    top: 30%;
+    bottom: -50%;
     left: 10%;
     background-color: ${colors.light};
     display: flex;
@@ -17,25 +17,12 @@ const Container = styled.div`
     font-weight: bold;
     z-index: 1;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    animation-name: showPopUp;
-    animation-duration: 1.5s;
-
-    @keyframes showPopUp{
-        0% {
-            top: 150%;
-        }
-        70% {
-            top: 25%;
-        }
-        100% {
-            top: 30%;
-        }
-    }
+    opacity: 0;
 `
 
 const Popup = (props) => {
     return (
-        <Container>
+        <Container className="popup">
             <p>{props.name}</p>
         </Container>
     );

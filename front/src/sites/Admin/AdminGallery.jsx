@@ -31,7 +31,6 @@ export default function AdminGallery() {
 
     const showGallery = () => {
         axios.get("http://localhost:3001/show_gallery").then((response) => {
-            console.log(response.data);
             setGallery(response.data);
         }
         )
@@ -49,7 +48,6 @@ export default function AdminGallery() {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Link</th>
                         <th>Tytuł</th>
                     </tr>
                 </thead>
@@ -60,8 +58,7 @@ export default function AdminGallery() {
                                 id={key}
                             >
                                 <td>{key + 1}</td>
-                                <td>{img.link}</td>
-                                <td>{img.title}</td>
+                                <td>{img.name}</td>
                             </tr>
                         )
                     })}

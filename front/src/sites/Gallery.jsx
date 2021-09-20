@@ -28,14 +28,21 @@ const GalleryContainer = styled.div`
 
 const Gallery = () => {
 
-    const [gallery, setGallery] = useState([]);
+    const [tmpGallery, setTmpGallery] = useState([]);
 
-    const showGallery = () => {
-        axios.get("http://localhost:3001/show_gallery").then((response) => {
-            console.log(response.data);
-            setGallery(response.data);
-        }
-        )}
+    const showGallery =  () => {
+        axios.get("http://localhost:3001/show_gallery").then( (response) => {
+
+            const arrayOfImages = [];
+            response.data.forEach( element => {
+                const oneImage = element.image;
+                const convertedImage = Buffer.from(oneImage, 'binary').toString('base64');
+                arrayOfImages.push(convertedImage)
+            });
+            setTmpGallery(arrayOfImages);
+        });
+    };
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -45,8 +52,8 @@ const Gallery = () => {
     return (
         <GalleryContainer>
             <h1>Galeria</h1>
-            {gallery.map((photo, key = photo.id) => {
-                return <img src={photo.link} alt={`photo_${key}`} />
+            {tmpGallery.map((image, key = image) => {
+                return <img src={`data:image/jpeg;base64,${image}`} alt={`photo_${key}`} key={key}/>
             })}
         </GalleryContainer>
     );

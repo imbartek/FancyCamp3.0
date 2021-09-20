@@ -10,6 +10,7 @@ const session = require("express-session");
 const { response } = require("express");
 const saltRounds = 10;
 const fileUpload = require("express-fileupload");
+const nodemailer = require('nodemailer');
 
 //app.use(express.json());
 app.use(
@@ -182,14 +183,10 @@ const createTable = () => {
 app.get("/show_gallery", (req, res) => {
   const id = req.id;
 
-  db.query("SELECT * FROM gallery", (err, result) => {
+  db.query("SELECT * FROM pics", (err, result) => {
     if (err) {
       console.log(err);
     }
-    /*if (result.length > 0) {
-                res.send(result);
-                console.log(result);
-            }*/
     if (result) {
       console.log(result);
       res.send(result);
@@ -274,6 +271,157 @@ app.post("/upload", async (req, res) => {
       res.sendStatus(400);
   }
 });
+
+
+//add post
+app.post("/add_post", (req, res) => {
+  const title = req.body.title;
+  const details = req.body.details;
+
+  db.query(
+    "INSERT INTO posts (title, body, timestamp) VALUES (?,?,?)",
+    [title, details, new Date()],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send({ message: "Coś poszło nie tak." });
+      } else {
+        res.send({ message: "Dodano nowy post!" });
+      }
+    }
+  );
+});
+
+//show posts
+app.get("/show_posts", (req, res) => {
+  db.query("SELECT * FROM posts", (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    if (result) {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+//edit post
+app.post("/edit_post", (req, res) => {
+  const id = req.body.id;
+  const title = req.body.title;
+  const details = req.body.details;
+  db.query(
+    "UPDATE `posts` SET `title`= ?, `body`= ?, `timestamp`= ? WHERE `id` = ?",
+    [title, details, new Date(), id],
+    (err, reuslt) => {
+      if (err) {
+        console.log(err);
+        res.send({ message: "Coś poszło nie tak." });
+      } else {
+        res.send({ message: `Edytowano post` });
+      }
+    }
+  );
+});
+
+//delete post
+app.post("/delete_post", (req, res) => {
+  const id = req.body.id;
+  db.query(
+    "DELETE FROM `posts` WHERE id = ?",
+    [id],
+    (err, reuslt) => {
+      if (err) {
+        console.log(err);
+        res.send({ message: "Coś poszło nie tak." });
+      } else {
+        res.send({ message: `Post usunieto` });
+      }
+    }
+  );
+});
+
+//add_price_list
+app.post("/add_price_list", (req, res) => {
+  const list = req.body.list;
+
+  db.query(
+    "INSERT INTO price_list (list) VALUES (?)",
+    [list],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send({ message: "Coś poszło nie tak." });
+      } else {
+        res.send({ message: "Dodano nowy cennik!" });
+      }
+    }
+  );
+});
+
+//show price_list
+app.get("/show_price_list", (req, res) => {
+  db.query("SELECT * FROM price_list", (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    if (result) {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+//update price_list
+app.post("/update_price_list", (req, res) => {
+  const list = req.body.list;
+  db.query(
+    "UPDATE `price_list` SET `list`= ? WHERE `id` = 1",
+    [list],
+    (err, reuslt) => {
+      if (err) {
+        console.log(err);
+        res.send({ message: "Coś poszło nie tak." });
+      } else {
+        res.send({ message: `Edytowano cennik` });
+      }
+    }
+  );
+});
+
+//send email from contact
+app.post("/send_mail", (req, res) => {
+  const {name, surname, email, phone, details} = req.body
+  const transporter = nodemailer.createTransport({
+    port: 465,
+    host: "smtp.gmail.com",
+    auth: {
+      user: 'izuke7@gmail.com',
+      pass: 'rtdqwehizwrjuuai'
+    },
+    secure: true,
+  });
+
+  const mailOptions = {
+    from: 'izuke7@gmail.com',
+    to: 'im.bartek@o2.pl',
+    subject: `Asystent FancyCamp - rezerwacja`,
+    text:
+    `Imię: ${name},
+  Nazwisko: ${surname},
+  Email: ${email},
+  Numer telefonu; ${phone},
+  Wiadomosc: ${details}`
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+})
 
 app.listen(port, () => {
   console.log(`App started at: ${port}`);

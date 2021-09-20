@@ -36,7 +36,7 @@ const Nav = styled.div`
     & .mobile_nav{
             width: 100vw;
             position: absolute;
-            top: -100vh;
+            top: -120vh;
             left: 0;
             display: none;
             flex-flow: column;
@@ -53,7 +53,7 @@ const Nav = styled.div`
             & a{
                 display: inline-block;
                 width: 100%;
-                padding: 8% 0;
+                padding: 6% 0;
             }
         }
     & .active{

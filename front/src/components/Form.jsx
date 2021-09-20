@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import { colors } from '../utils/utils';
 import Btn from './Btn';
+import axios from 'axios';
 
 const FormContainer = styled.form`
     display: flex;
@@ -42,22 +43,46 @@ const FormContainer = styled.form`
 `
 
 const Form = (props) => {
+    const [name, setName] = useState("");
+    const [surname, setSurname] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [details, setDetails] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        sendEmail();
+    }
+
+    const sendEmail = () => {
+        axios.post("http://localhost:3001/send_mail",{
+            name: name,
+            surname: surname,
+            email: email,
+            phone: phone,
+            details: details
+        }).then(response => {
+            console.log("wyslano email");
+        })
+    };
+
+
     return (
-        <FormContainer>
+        <FormContainer onSubmit={handleSubmit}>
             <label htmlFor="name">Imię</label>
-            <input type="text" name="name" />
+            <input type="text" name="name" onChange={e => setName(e.target.value)}/>
 
             <label htmlFor="surrname">Naziwsko</label>
-            <input type="text" name="surrname" />
+            <input type="text" name="surrname" onChange={e => setSurname(e.target.value)}/>
 
             {props.email && <label htmlFor="email">Email</label>}
-            {props.email && <input type="text" name="email" />}
+            {props.email && <input type="text" name="email" onChange={e => setEmail(e.target.value)}/>}
 
             <label htmlFor="tel">Telefon</label>
-            <input type="text" name="tel" />
+            <input type="text" name="tel" onChange={e => setPhone(e.target.value)}/>
 
             {props.description && <label htmlFor="desc">Treść</label>}
-            {props.description && <textarea name="desc" id="desc" cols="30" rows="10"></textarea>}
+            {props.description && <textarea name="desc" id="desc" cols="30" rows="10" onChange={e => setDetails(e.target.value)}></textarea>}
 
             <div className="checkbox_container">
                 <input type="checkbox" name="rodo" id="rodo"/>
