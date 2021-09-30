@@ -136,7 +136,7 @@ export default function AdminBlog() {
                     {addedData ? ReactHtmlParser(addData) : ''}
                 </div>
             </div>
-            <table border="1" cellpadding="1" cellspacing="1">
+            <table border="1" cellPadding="1" cellSpacing="1">
                 <thead>
                     <tr>
                         <th>ID</th>

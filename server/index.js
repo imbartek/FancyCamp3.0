@@ -216,6 +216,35 @@ app.post("/add_date", (req, res) => {
       }
     }
   );
+
+  const transporter = nodemailer.createTransport({
+    port: 465,
+    host: "smtp.gmail.com",
+    auth: {
+      user: 'izuke7@gmail.com',
+      pass: 'rtdqwehizwrjuuai'
+    },
+    secure: true,
+  });
+
+  const mailOptions = {
+    from: 'izuke7@gmail.com',
+    to: 'im.bartek@o2.pl',
+    subject: `Asystent FancyCamp - rezerwacja`,
+    text:
+    `Imię: ${name},
+  Nazwisko: ${surname},
+  Numer telefonu: ${phone},
+  Data: od ${fromDate} do ${toDate}`
+  };
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
 });
 
 //show reservations
@@ -405,12 +434,12 @@ app.post("/send_mail", (req, res) => {
   const mailOptions = {
     from: 'izuke7@gmail.com',
     to: 'im.bartek@o2.pl',
-    subject: `Asystent FancyCamp - rezerwacja`,
+    subject: `Asystent FancyCamp - Kontakt`,
     text:
     `Imię: ${name},
   Nazwisko: ${surname},
   Email: ${email},
-  Numer telefonu; ${phone},
+  Numer telefonu: ${phone},
   Wiadomosc: ${details}`
   };
 

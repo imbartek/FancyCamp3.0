@@ -10,7 +10,6 @@ const Container = styled.div`
         display: flex;
         flex-flow: column;
         align-items: center;
-        width: 100vw;
     }
 
     & h1{

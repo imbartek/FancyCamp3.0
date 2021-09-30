@@ -36,14 +36,6 @@ const Contact = () => {
     return (
         <Container>
             <h1>Kontakt</h1>
-            <div>
-                <p>LmFlow Sp. z.o.o</p>
-                <p>Podlesie 3</p>
-                <p>41-303 Dąbrowa Górnicza</p>
-                <p>NIP: 6252456317</p>
-                <p>Email: example@example.com</p>
-                <p>Tel: +48 000 000 000</p>
-            </div>
             <iframe title="mymap" src="https://www.google.com/maps/d/u/0/embed?mid=12GXbW5YifimeWgAbrYGEei-eQL22Yr2K&z=10" className="map"></iframe>
             <Form
                 email={true}

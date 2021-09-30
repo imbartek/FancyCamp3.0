@@ -26,6 +26,12 @@ const Container = styled.footer`
         list-style: none;
     }
 
+    & .footer{
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
     @media screen and (max-width: 768px){
         flex-flow: column;
 
@@ -42,19 +48,8 @@ const Container = styled.footer`
 const Footer = () => {
     return (
         <Container>
-            <div>
-                <ul>
-                    <li>LmFlow Sp. z.o.o</li>
-                    <li>Podlesie 3</li>
-                    <li>41-303 Dąbrowa Górnicza</li>
-                    <li>Telefon: +48 000 000 000</li>
-                    <li>E-mail: example@example.com</li>
-                    <li>NIP: 6252456317</li>
-                </ul>
-            </div>
-            <div>
+            <div className="footer">
                 <img src={images.location} alt="location_icon" />
-                <img src={images.facebook} alt="facebook_icon" />
                 <img src={images.instagram} alt="instagram_icon" />
             </div>
             <div>
